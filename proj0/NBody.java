@@ -80,7 +80,7 @@ public class NBody {
             StdDraw.picture(0,0,"images/starfield.jpg");
             /* Draw all planets. */
             for(Planet p : AllPlanets) {
-                p.draw("images/");
+                p.draw();
             }
             /* Shows the drawing to the screen, and waits 10 milliseconds. */
             StdDraw.show();

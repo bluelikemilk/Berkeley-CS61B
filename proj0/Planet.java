@@ -98,8 +98,8 @@ public class Planet {
     }
 
     // draw this planet use stdDraw
-    public void draw(String folder) {
-        StdDraw.picture(xxPos, yyPos, folder + imgFileName);
+    public void draw() {
+        StdDraw.picture(xxPos, yyPos, "images/" + imgFileName);
     }
 
 

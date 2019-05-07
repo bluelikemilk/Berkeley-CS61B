@@ -105,7 +105,7 @@ public class ArrayDeque<T> {
         size -= 1;
 
         // check usage ratio
-        if (size >= 16 && (float) size / (float) fullLength < 0.25) {
+        if (size >= 16 && (float) size / (float) fullLength <= 0.25) {
             resize((int) (fullLength / (float) RFACTOR));
         }
 
@@ -130,7 +130,7 @@ public class ArrayDeque<T> {
         size -= 1;
 
         // check usage ratio
-        if (size > 16 && (float) size / (float) fullLength < 0.25) {
+        if (size >= 16 && (float) size / (float) fullLength <= 0.25) {
             resize((int) (fullLength / (float) RFACTOR));
         }
 

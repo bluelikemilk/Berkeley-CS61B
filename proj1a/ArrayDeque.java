@@ -146,19 +146,19 @@ public class ArrayDeque<T> {
         return items[(nextFirst + 1 + index) % items.length];
     }
 
-    public static void main(String[] args) {
-        ArrayDeque<String> L = new ArrayDeque<>();
-        L.removeFirst();
-        //L.addFirst("a");
-        for (int i = 0; i < 64; i++) {
-            L.addFirst("b");
-        }
-       // L.addFirst("c");63
-        for (int i = 0; i < 63; i++) {
-            L.removeFirst();
-        }
-        L.addFirst("e");
-        System.out.println(L.get(8));
-    }
+//    public static void main(String[] args) {
+//        ArrayDeque<String> L = new ArrayDeque<>();
+//        L.removeFirst();
+//        //L.addFirst("a");
+//        for (int i = 0; i < 64; i++) {
+//            L.addFirst("b");
+//        }
+//       // L.addFirst("c");63
+//        for (int i = 0; i < 63; i++) {
+//            L.removeFirst();
+//        }
+//        L.addFirst("e");
+//        System.out.println(L.get(8));
+//    }
 
 }

@@ -17,11 +17,11 @@ public class ArrayDeque<T> {
     private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
         int total = items.length;
-        if (nextFirst == total-1) { // if start from 0, just copy the whole array
-            System.arraycopy(items, 0, a, 1, total);
+        if (nextFirst < nextLast-1) { // if start from 0, just copy the whole array
+            System.arraycopy(items, nextFirst+1, a, 1, size);
         } else { // else, copy by two segments
             System.arraycopy(items, (nextFirst + 1) % total, a, 1, total - nextFirst - 1);
-            System.arraycopy(items, 0, a, total - nextFirst, nextFirst + 1);
+            System.arraycopy(items, 0, a, total - nextFirst, size - (total - nextFirst - 1));
         }
         items = a;
         nextFirst = 0;
@@ -117,7 +117,7 @@ public class ArrayDeque<T> {
         nextLast -= 1;
         nextLast = nextLast%fullLength;
         T item = items[nextLast];
-        items[nextFirst] = null;
+        items[nextLast] = null;
         size -= 1;
 
         // return the removed item
@@ -129,20 +129,24 @@ public class ArrayDeque<T> {
             System.out.println("Index exceeds bound of box!");
             return null;
         }
-        return items[(nextFirst + 1 + index) % size];
+        return items[(nextFirst + 1 + index) % items.length];
     }
 
 //    public static void main(String[] args) {
 //        ArrayDeque<String> L = new ArrayDeque<>();
+//        L.removeFirst();
 //        L.addLast("a");
 //        L.addLast("b");
 //        L.addLast("c");
+//        for (int i = 0; i < 100; i++) {
+//            L.addLast("d");
+//        }
 //        L.addLast("d");
-//        L.addLast("d");
-//        L.addLast("d");
-//        L.addLast("d");
-//        L.addLast("d");
-//        L.removeLast();
+//        for (int i = 0; i < 96; i++) {
+//            L.removeLast();
+//        }
+//        L.addLast("e");
+//        System.out.println(L.get(8));
 //    }
 
 }

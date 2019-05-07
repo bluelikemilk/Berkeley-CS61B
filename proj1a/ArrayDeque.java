@@ -10,15 +10,15 @@ public class ArrayDeque<T> {
         items = (T[]) new Object[8];
         size = 0;
         nextFirst = 0;
-        nextLast=1;
+        nextLast = 1;
     }
 
     /** Resize the length of items array*/
     private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
         int total = items.length;
-        if (nextFirst < nextLast-1) { // if start from 0, just copy the whole array
-            System.arraycopy(items, nextFirst+1, a, 1, size);
+        if (nextFirst < nextLast - 1) { // if start from 0, just copy the whole array
+            System.arraycopy(items, nextFirst + 1, a, 1, size);
         } else { // else, copy by two segments
             System.arraycopy(items, (nextFirst + 1) % total, a, 1, total - nextFirst - 1);
             System.arraycopy(items, 0, a, total - nextFirst, size - (total - nextFirst - 1));
@@ -31,7 +31,7 @@ public class ArrayDeque<T> {
     /** Calculate the circular index with total length total*/
     private int cirIndex(int index, int total) {
         if (index >= 0) {
-            index = index%total;
+            index = index % total;
         } else {
             index = index + total;
             cirIndex(index, total);
@@ -43,7 +43,7 @@ public class ArrayDeque<T> {
     public void addFirst(T item) {
         // check
         if (size == items.length) {
-            resize(size*RFACTOR);
+            resize(size * RFACTOR);
         }
 
         // insert item
@@ -57,7 +57,7 @@ public class ArrayDeque<T> {
     public void addLast(T item) {
         // check
         if (size == items.length) {
-            resize(size*RFACTOR);
+            resize(size * RFACTOR);
         }
 
         // insert item
@@ -69,7 +69,9 @@ public class ArrayDeque<T> {
 
     /** Return true if the deque empty*/
     public boolean isEmpty() {
-        if(size==0) {return true;}
+        if (size == 0) {
+            return true;
+        }
         return false;
     }
 
@@ -81,8 +83,8 @@ public class ArrayDeque<T> {
     /** print all items*/
     public void printDeque() {
         int start = nextFirst + 1;
-        for(int i = 0; i<size; i++) {
-            System.out.print(items[(start+i)/items.length] + " ");
+        for (int i = 0; i < size; i++) {
+            System.out.print(items[(start + i) / items.length] + " ");
         }
         System.out.println('\n');
     }
@@ -90,22 +92,22 @@ public class ArrayDeque<T> {
     /** Remove the first item in the deque*/
     public T removeFirst() {
         // check empty
-        if(isEmpty()) {
+        if (isEmpty()) {
             return null;
         }
 
         int fullLength = items.length;
-        // check usage ratio
-        if(size > 16 && (float)size/(float)fullLength < 0.25) {
-            resize((int)(fullLength/(float)RFACTOR));
-        }
-
         // remove the first item
         nextFirst += 1;
         nextFirst = cirIndex(nextFirst, fullLength);
         T item = items[nextFirst];
         items[nextFirst] = null;
         size -= 1;
+
+        // check usage ratio
+        if (size >= 16 && (float) size / (float) fullLength < 0.25) {
+            resize((int) (fullLength / (float) RFACTOR));
+        }
 
         // return the removed item
         return item;
@@ -114,7 +116,7 @@ public class ArrayDeque<T> {
     /** Remove the last item in the deque*/
     public T removeLast() {
         // check empty
-        if(isEmpty()) {
+        if (isEmpty()) {
             return null;
         }
 
@@ -128,8 +130,8 @@ public class ArrayDeque<T> {
         size -= 1;
 
         // check usage ratio
-        if(size > 16 && (float)size/(float)fullLength < 0.25) {
-            resize((int)(fullLength/(float)RFACTOR));
+        if (size > 16 && (float) size / (float) fullLength < 0.25) {
+            resize((int) (fullLength / (float) RFACTOR));
         }
 
         // return the removed item
@@ -137,7 +139,7 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
-        if(index > size - 1) {
+        if (index > size - 1) {
             System.out.println("Index exceeds bound of box!");
             return null;
         }
@@ -147,12 +149,12 @@ public class ArrayDeque<T> {
     public static void main(String[] args) {
         ArrayDeque<String> L = new ArrayDeque<>();
         L.removeFirst();
-        L.addFirst("a");
-        for (int i = 0; i < 6; i++) {
+        //L.addFirst("a");
+        for (int i = 0; i < 64; i++) {
             L.addFirst("b");
         }
-        L.addFirst("c");
-        for (int i = 0; i < 8; i++) {
+       // L.addFirst("c");63
+        for (int i = 0; i < 63; i++) {
             L.removeFirst();
         }
         L.addFirst("e");

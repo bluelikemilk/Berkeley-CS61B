@@ -9,11 +9,11 @@ public class LinkedListDeque<T> {
     /** Build a private class for each node of the DLList */
     private class TNode {
 
-        public TNode prev;
-        public T item;
-        public TNode next;
+        private TNode prev;
+        private T item;
+        private TNode next;
         /** Constructor*/
-        public TNode(TNode p, T i, TNode n) {
+        TNode(TNode p, T i, TNode n) {
 
             prev = p;
             item = i;
@@ -95,7 +95,7 @@ public class LinkedListDeque<T> {
     /** Removes and returns the item at the front of the deque.
      * If no such item exists, returns null.*/
     public T removeFirst() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             System.out.println("The list is empty!");
             return null;
         }
@@ -115,7 +115,7 @@ public class LinkedListDeque<T> {
     /** Removes and returns the item at the back of the deque.
      * If no such item exists, returns null.*/
     public T removeLast() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             System.out.println("The list is empty!");
             return null;
         }

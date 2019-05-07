@@ -1,12 +1,12 @@
 public class ArrayDeque<T> {
-    public T[] items;
-    public int size;
-    public int nextFirst;
-    public int nextLast;
+    private T[] items;
+    private int size;
+    private int nextFirst;
+    private int nextLast;
     private int RFACTOR = 2;
 
     /** Create an empty array deque*/
-    public void ArrayDeque() {
+    public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
         nextFirst = 0;
@@ -16,7 +16,13 @@ public class ArrayDeque<T> {
     /** Resize the length of items array*/
     private void resize(int capacity) {
         T[] a = (T[]) new Object[capacity];
-        System.arraycopy(items, nextFirst+1, a, 1, size);
+        int total = items.length;
+        if (nextFirst == total-1) { // if start from 0, just copy the whole array
+            System.arraycopy(items, 0, a, 1, total);
+        } else { // else, copy by two segments
+            System.arraycopy(items, (nextFirst + 1) % total, a, 1, total - nextFirst - 1);
+            System.arraycopy(items, 0, a, total - nextFirst, nextFirst + 1);
+        }
         items = a;
         nextFirst = 0;
         nextLast = size + 1;
@@ -125,5 +131,18 @@ public class ArrayDeque<T> {
         }
         return items[(nextFirst + 1 + index) % size];
     }
+
+//    public static void main(String[] args) {
+//        ArrayDeque<String> L = new ArrayDeque<>();
+//        L.addLast("a");
+//        L.addLast("b");
+//        L.addLast("c");
+//        L.addLast("d");
+//        L.addLast("d");
+//        L.addLast("d");
+//        L.addLast("d");
+//        L.addLast("d");
+//        L.removeLast();
+//    }
 
 }

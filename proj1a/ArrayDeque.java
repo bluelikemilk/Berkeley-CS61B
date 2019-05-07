@@ -28,6 +28,17 @@ public class ArrayDeque<T> {
         nextLast = size + 1;
     }
 
+    /** Calculate the circular index with total length total*/
+    private int cirIndex(int index, int total) {
+        if (index >= 0) {
+            index = index%total;
+        } else {
+            index = index + total;
+            cirIndex(index, total);
+        }
+        return index;
+    }
+
     /** Add an item in the first position*/
     public void addFirst(T item) {
         // check
@@ -38,7 +49,7 @@ public class ArrayDeque<T> {
         // insert item
         items[nextFirst] = item;
         nextFirst -= 1;
-        nextFirst = nextFirst%items.length;
+        nextFirst = cirIndex(nextFirst, items.length);
         size += 1;
     }
 
@@ -52,7 +63,7 @@ public class ArrayDeque<T> {
         // insert item
         items[nextLast] = item;
         nextLast += 1;
-        nextLast = nextLast%items.length;
+        nextLast = cirIndex(nextLast, items.length);
         size += 1;
     }
 
@@ -91,7 +102,7 @@ public class ArrayDeque<T> {
 
         // remove the first item
         nextFirst += 1;
-        nextFirst = nextFirst%fullLength;
+        nextFirst = cirIndex(nextFirst, fullLength);
         T item = items[nextFirst];
         items[nextFirst] = null;
         size -= 1;
@@ -108,17 +119,18 @@ public class ArrayDeque<T> {
         }
 
         int fullLength = items.length;
+
+        // remove the last item
+        nextLast -= 1;
+        nextLast = cirIndex(nextLast, fullLength);
+        T item = items[nextLast];
+        items[nextLast] = null;
+        size -= 1;
+
         // check usage ratio
         if(size > 16 && (float)size/(float)fullLength < 0.25) {
             resize((int)(fullLength/(float)RFACTOR));
         }
-
-        // remove the last item
-        nextLast -= 1;
-        nextLast = nextLast%fullLength;
-        T item = items[nextLast];
-        items[nextLast] = null;
-        size -= 1;
 
         // return the removed item
         return item;
@@ -132,21 +144,19 @@ public class ArrayDeque<T> {
         return items[(nextFirst + 1 + index) % items.length];
     }
 
-//    public static void main(String[] args) {
-//        ArrayDeque<String> L = new ArrayDeque<>();
-//        L.removeFirst();
-//        L.addLast("a");
-//        L.addLast("b");
-//        L.addLast("c");
-//        for (int i = 0; i < 100; i++) {
-//            L.addLast("d");
-//        }
-//        L.addLast("d");
-//        for (int i = 0; i < 96; i++) {
-//            L.removeLast();
-//        }
-//        L.addLast("e");
-//        System.out.println(L.get(8));
-//    }
+    public static void main(String[] args) {
+        ArrayDeque<String> L = new ArrayDeque<>();
+        L.removeFirst();
+        L.addFirst("a");
+        for (int i = 0; i < 6; i++) {
+            L.addFirst("b");
+        }
+        L.addFirst("c");
+        for (int i = 0; i < 8; i++) {
+            L.removeFirst();
+        }
+        L.addFirst("e");
+        System.out.println(L.get(8));
+    }
 
 }

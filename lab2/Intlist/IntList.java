@@ -83,6 +83,10 @@ public class IntList {
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
         IntList p = A;
+        if (p == null) {
+            System.out.println("The list is empty!");
+            return null;
+        }
         while(p.rest != null) {// find the last element of A
             p = p.rest;
         }
@@ -114,17 +118,6 @@ public class IntList {
         }
         return C.rest;
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

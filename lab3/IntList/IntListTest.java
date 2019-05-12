@@ -70,4 +70,18 @@ public class IntListTest {
       * to add a main method. See ArithmeticTest.java for an
       * example. */
 
+    @Test(timeout = 1000) // maximum test time is 1000 ms
+    public void testReverse() {
+        // test the returned list is reversed
+        IntList A = IntList.of(1,2,3);
+        IntList Ar = IntList.reverse(A);
+        IntList exp = IntList.of(3, 2, 1);
+        assertEquals(exp, Ar);
+        // test the method is destructive
+        assertNotEquals(A, Ar);
+        // test the method properly handles null input
+        IntList B = IntList.of();
+        assertEquals(null, IntList.reverse(B));
+    }
+
 }

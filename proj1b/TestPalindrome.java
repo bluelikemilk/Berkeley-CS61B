@@ -19,33 +19,33 @@ public class TestPalindrome {
     @Test
     public void isPalindrome() {
         String s1 = "racecar";
-        assertTrue( palindrome.isPalindrome(s1));
+        assertTrue(palindrome.isPalindrome(s1));
         s1 = "root";
-        assertFalse( palindrome.isPalindrome(s1));
+        assertFalse(palindrome.isPalindrome(s1));
         s1 = "a";
-        assertTrue( palindrome.isPalindrome(s1));
+        assertTrue(palindrome.isPalindrome(s1));
         s1 = "";
-        assertTrue( palindrome.isPalindrome(s1));
+        assertTrue(palindrome.isPalindrome(s1));
         s1 = "cat";
-        assertFalse( palindrome.isPalindrome(s1));
+        assertFalse(palindrome.isPalindrome(s1));
         s1 = "abbc";
-        assertFalse( palindrome.isPalindrome(s1));
+        assertFalse(palindrome.isPalindrome(s1));
     }
 
     @Test
     public void isPalindromeOffByOne() { // overload isPalindrome with off by one
         OffByOne offByOne = new OffByOne();
         String s1 = "flake";
-        assertTrue( palindrome.isPalindrome(s1, offByOne));
+        assertTrue(palindrome.isPalindrome(s1, offByOne));
         s1 = "toot";
-        assertFalse( palindrome.isPalindrome(s1, offByOne));
+        assertFalse(palindrome.isPalindrome(s1, offByOne));
         s1 = "a";
-        assertTrue( palindrome.isPalindrome(s1, offByOne));
+        assertTrue(palindrome.isPalindrome(s1, offByOne));
         s1 = "";
-        assertTrue( palindrome.isPalindrome(s1, offByOne));
+        assertTrue(palindrome.isPalindrome(s1, offByOne));
         s1 = "cat";
-        assertFalse( palindrome.isPalindrome(s1, offByOne));
+        assertFalse(palindrome.isPalindrome(s1, offByOne));
         s1 = "abcb";
-        assertTrue( palindrome.isPalindrome(s1, offByOne));
+        assertTrue(palindrome.isPalindrome(s1, offByOne));
     }
 }

@@ -43,8 +43,8 @@ public class Palindrome {
         if (length < 2) {
             return true;
         }
-        int start = 0, end = length- 1;
-        while(start < end) {
+        int start = 0, end = length - 1;
+        while (start < end) {
             if (!cc.equalChars(word.charAt(start), word.charAt(end))) {
                 return false;
             }
